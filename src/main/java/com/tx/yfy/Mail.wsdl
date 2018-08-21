@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+        name="MailNotificationBPELProcess"
+        targetNamespace="http://xmlns.oracle.com/YFY_CHP_SOA/UTL_CHP_EmailNotificationService/MailNotificationBPELProcess"
+        xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+        xmlns:client="http://xmlns.oracle.com/YFY_CHP_SOA/UTL_CHP_EmailNotificationService/MailNotificationBPELProcess"
+        xmlns:ns1="http://yfy.com/SOA/XXIF/CHPMailNotifProcess"
+        xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+>
+    <wsdl:documentation>
+        <abstractWSDL>http://erpsoa01t.yfy.corp:7004/soa-infra/services/YFYP/EmailUtils!1.0/WSDLs/MailNotificationBPELProcess.wsdl</abstractWSDL>
+    </wsdl:documentation>
+    <plnk:partnerLinkType name="MailNotificationBPELProcess">
+        <plnk:role name="MailNotificationBPELProcessProvider" portType="client:MailNotificationBPELProcess"/>
+    </plnk:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://yfy.com/SOA/XXIF/CHPMailNotifProcess" schemaLocation="../CHTMailNotificationRequest.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="MailNotificationBPELProcessRequestMessage">
+        <wsdl:part name="payload" element="ns1:CHPMailNotificationRequest"/>
+    </wsdl:message>
+    <wsdl:portType name="MailNotificationBPELProcess">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:MailNotificationBPELProcessRequestMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="MailNotificationBPELProcessBinding" type="client:MailNotificationBPELProcess">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="process">
+            <soap:operation style="document" soapAction="process"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="mailnotificationbpelprocess_client_ep">
+        <wsdl:port name="MailNotificationBPELProcess_pt" binding="client:MailNotificationBPELProcessBinding">
+            <soap:address location="http://erpsoa01t.yfy.corp:7004/soa-infra/services/YFYP/EmailUtils/mailnotificationbpelprocess_client_ep"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
